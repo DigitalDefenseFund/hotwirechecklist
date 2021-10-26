@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<turbo-frame id="checklist">
+  <p>
+    <strong>Name:</strong>
+    <%= @checklist.name %>
+  </p>
+  <p>
+    <%= link_to 'Edit', edit_checklist_path(@checklist) %> |
+    <%= link_to 'Back', checklists_path %>
+  </p>
+</turbo-frame>
+
+<%= turbo_stream_from @checklist %>
+
+<div class="col-6">
+  <%= turbo_frame_tag "items" do %>
+    <ul data-draggable-target="list" class="list-group" data-controller="draggable">
+      <%= render @checklist.items %>
+    </ul>
+  <% end %>
+
+  <%= turbo_frame_tag "new_item", src: new_checklist_item_path(@checklist), target: "_top" %>
+</div>
+

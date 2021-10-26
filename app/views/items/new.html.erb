@@ -1,0 +1,13 @@
+<%= turbo_frame_tag "new_item", target: "_top" do %>
+  <div class="card">
+    <div class="col-12">
+      <%= form_with(model: [@checklist, @item],
+        id: dom_id(@item),
+        class: "form-inline",
+        data: {controller: "reset_form"}) do |form| %>
+        <%= form.text_field :description, class:"form-control w-75" %>
+        <%= form.submit "Add", class: "btn btn-primary mb-2", data: {action: "reset_form#reset"} %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
